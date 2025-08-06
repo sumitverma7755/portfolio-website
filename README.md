@@ -4,7 +4,9 @@ Welcome to my personal portfolio website! This is a modern, responsive web portf
 
 ## 🚀 Live Demo
 
-Visit my portfolio: [https://sumitverma7755.github.io/portfolio-website/](https://sumitverma7755.github.io/portfolio-website/)
+🌐 **Live on Vercel**: [https://portfolio-website-sumitverma.vercel.app/](https://portfolio-website-sumitverma.vercel.app/)
+
+📱 **GitHub Pages**: [https://sumitverma7755.github.io/portfolio-website/](https://sumitverma7755.github.io/portfolio-website/)
 
 ## 📋 Table of Contents
 
@@ -42,7 +44,8 @@ I'm Sumit Kumar Verma, a passionate Software Engineer based in Lucknow, India. I
 - **Icons**: Font Awesome
 - **Email Service**: EmailJS
 - **Version Control**: Git & GitHub
-- **Hosting**: GitHub Pages
+- **Hosting**: Vercel & GitHub Pages
+- **Deployment**: Automatic deployment from GitHub
 
 ## 📄 Sections
 
@@ -111,6 +114,29 @@ portfolio-website/
 - Mobile: 320px - 768px
 - Tablet: 768px - 1024px
 - Desktop: 1024px and above
+
+## 🚀 Deployment
+
+### Deploy to Vercel (Recommended)
+
+1. **Sign up on Vercel**:
+   - Visit [vercel.com](https://vercel.com)
+   - Sign up/Login with your GitHub account
+
+2. **Import Repository**:
+   - Click "New Project"
+   - Import your `portfolio-website` repository
+   - Click "Deploy" with default settings
+
+3. **Automatic Deployments**:
+   - Any push to the main branch triggers automatic deployment
+   - Perfect for continuous deployment workflow
+
+### Deploy to GitHub Pages
+
+1. Go to repository Settings → Pages
+2. Select "main" branch as source
+3. Your site will be live at: `https://sumitverma7755.github.io/portfolio-website/`
 
 ## 🤝 Contributing
 
