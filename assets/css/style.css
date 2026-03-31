@@ -6,10 +6,7 @@
   padding: 0;
   box-sizing: border-box;
   text-decoration: none;
-  outline: none;
   border: none;
-  text-transform: capitalize;
-  transition: all 0.2s linear;
 }
 html {
   font-size: 62.5%;
@@ -19,6 +16,15 @@ html {
 body {
   background: #f7f7f7;
   font-family: "Poppins", sans-serif;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 0.3rem solid #011aff;
+  outline-offset: 0.2rem;
 }
 
 *::selection {
@@ -701,6 +707,10 @@ header .navbar ul li a:hover {
 }
 .work .desc p {
   font-size: 1.5rem;
+}
+.work .desc .no-links {
+  font-size: 1.4rem;
+  margin-top: 1rem;
 }
 .work .desc .btns {
   display: flex;
