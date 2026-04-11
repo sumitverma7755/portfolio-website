@@ -1,0 +1,642 @@
+[
+  {
+    "id": "notystack-android",
+    "name": "NotyStack Android",
+    "featured": false,
+    "category": "mobile",
+    "label": "Mobile App",
+    "summary": "Fully fledged android CRUD app based on different design patterns. Built using Java, XML, SQLite, Firebase, RoomDB, MVVM.",
+    "description": "Fully fledged android CRUD app based on different design patterns. Built using Java, XML, SQLite, Firebase, RoomDB, MVVM.",
+    "image": "/assets/images/projects/notystackandroid.png",
+    "imageAlt": "Preview image for NotyStack Android.",
+    "tags": [
+      "Android",
+      "Mobile App",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "sppu-engg-prep",
+    "name": "SPPU Engg Prep",
+    "featured": false,
+    "category": "mobile",
+    "label": "Mobile App",
+    "summary": "All in one SPPU Engineering resources. Built using Java, XML and Firebase.",
+    "description": "All in one SPPU Engineering resources. Built using Java, XML and Firebase.",
+    "image": "/assets/images/projects/sppuprepandroid.png",
+    "imageAlt": "Preview image for SPPU Engg Prep.",
+    "tags": [
+      "Web Project",
+      "Mobile App",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "newsbox-android",
+    "name": "NewsBox Android",
+    "featured": false,
+    "category": "mobile",
+    "label": "Mobile App",
+    "summary": "Native android app built using Java, XML. Retrofit & Glide dependencies. Provides different category news.",
+    "description": "Native android app built using Java, XML. Retrofit & Glide dependencies. Provides different category news.",
+    "image": "/assets/images/projects/newsboxandroid.png",
+    "imageAlt": "Preview image for NewsBox Android.",
+    "tags": [
+      "Android",
+      "Mobile App",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "weatherly-android",
+    "name": "Weatherly Android",
+    "featured": false,
+    "category": "mobile",
+    "label": "Mobile App",
+    "summary": "Native android app built using Java, XML and Volley dependencies. Provides weather forecast.",
+    "description": "Native android app built using Java, XML and Volley dependencies. Provides weather forecast.",
+    "image": "/assets/images/projects/weatherlyandroid.png",
+    "imageAlt": "Preview image for Weatherly Android.",
+    "tags": [
+      "Android",
+      "Mobile App",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "instagram-mern",
+    "name": "Instagram MERN",
+    "featured": true,
+    "category": "fullstack",
+    "label": "Full Stack",
+    "summary": "Full-Stack Instagram clone built using MERN stack and realtime chat with the help of socket.iO",
+    "description": "Full-Stack Instagram clone built using MERN stack and realtime chat with the help of socket.iO",
+    "image": "/assets/images/projects/instagrammern.png",
+    "imageAlt": "Preview image for Instagram MERN.",
+    "tags": [
+      "MERN",
+      "Full Stack",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "https://instagramernstack.herokuapp.com/",
+      "demo": "https://instagramernstack.herokuapp.com/"
+    }
+  },
+  {
+    "id": "flipkart-mern",
+    "name": "Flipkart MERN",
+    "featured": true,
+    "category": "fullstack",
+    "label": "Full Stack",
+    "summary": "Full-Stack Flipkart with Admin Dashboard and Paytm Payment Gateway. MERN Stack WebApp, ready to use for business.",
+    "description": "Full-Stack Flipkart with Admin Dashboard and Paytm Payment Gateway. MERN Stack WebApp, ready to use for business.",
+    "image": "/assets/images/projects/flipkartmern.png",
+    "imageAlt": "Preview image for Flipkart MERN.",
+    "tags": [
+      "MERN",
+      "Full Stack",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "https://flipkartwebs.herokuapp.com/",
+      "demo": "https://flipkartwebs.herokuapp.com/"
+    }
+  },
+  {
+    "id": "resumegen",
+    "name": "ResumeGen",
+    "featured": true,
+    "category": "fullstack",
+    "label": "Full Stack",
+    "summary": "ReactJS Basic Resume Generator which will generate customized resume in few minutes on your requirements.",
+    "description": "ReactJS Basic Resume Generator which will generate customized resume in few minutes on your requirements.",
+    "image": "/assets/images/projects/resumegen.png",
+    "imageAlt": "Preview image for ResumeGen.",
+    "tags": [
+      "Web Project",
+      "Full Stack",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "https://resumegenx.netlify.app/",
+      "demo": "https://resumegenx.netlify.app/"
+    }
+  },
+  {
+    "id": "react-projects",
+    "name": "React-Projects",
+    "featured": true,
+    "category": "fullstack",
+    "label": "Full Stack",
+    "summary": "Full-Stack project dashboard which is collection of projects built on the React library.",
+    "description": "Full-Stack project dashboard which is collection of projects built on the React library.",
+    "image": "/assets/images/projects/reactprojects.png",
+    "imageAlt": "Preview image for React-Projects.",
+    "tags": [
+      "React",
+      "Full Stack",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "https://reactjsprojects.herokuapp.com/",
+      "demo": "https://reactjsprojects.herokuapp.com/"
+    }
+  },
+  {
+    "id": "flipkart-php",
+    "name": "Flipkart PHP",
+    "featured": false,
+    "category": "fullstack",
+    "label": "LAMP",
+    "summary": "Full-Stack Flipkart Clone Using LAMP Stack. With all major features and OTP authentication and Cashfree payment gateway.",
+    "description": "Full-Stack Flipkart Clone Using LAMP Stack. With all major features and OTP authentication and Cashfree payment gateway.",
+    "image": "/assets/images/projects/flipkartphp.png",
+    "imageAlt": "Preview image for Flipkart PHP.",
+    "tags": [
+      "PHP",
+      "LAMP",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "javascript-projects-website",
+    "name": "JavaScript Projects Website",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "This website is specially build to showcase all major javaScript projects. All my javaScript based projects are in it.",
+    "description": "This website is specially build to showcase all major javaScript projects. All my javaScript based projects are in it.",
+    "image": "/assets/images/projects/jspro.PNG",
+    "imageAlt": "Preview image for JavaScript Projects Website.",
+    "tags": [
+      "Web Project",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "web-ui-clones",
+    "name": "Web UI Clones",
+    "featured": false,
+    "category": "fullstack",
+    "label": "Full Stack",
+    "summary": "Flipkart, YouTube, Instagram, Sololearn web UI clones using tailwindCSS.",
+    "description": "Flipkart, YouTube, Instagram, Sololearn web UI clones using tailwindCSS.",
+    "image": "/assets/images/projects/webuiclones.png",
+    "imageAlt": "Preview image for Web UI Clones.",
+    "tags": [
+      "Web Project",
+      "Full Stack",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "crypto-tracker",
+    "name": "Crypto Tracker",
+    "featured": true,
+    "category": "fullstack",
+    "label": "Full Stack",
+    "summary": "Crypto Tracker built using ReactJS and Chakra UI. Supports dark mode. API used coingecko.",
+    "description": "Crypto Tracker built using ReactJS and Chakra UI. Supports dark mode. API used coingecko.",
+    "image": "/assets/images/projects/cryptotracker.png",
+    "imageAlt": "Preview image for Crypto Tracker.",
+    "tags": [
+      "Web Project",
+      "Full Stack",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "https://crypto-tracker-react-project.netlify.app/",
+      "demo": "https://crypto-tracker-react-project.netlify.app/"
+    }
+  },
+  {
+    "id": "hulu-website",
+    "name": "Hulu Website",
+    "featured": false,
+    "category": "fullstack",
+    "label": "Full Stack",
+    "summary": "Hulu website built using NextJS and tailwindCSS. API used TMDB, deployed on vercel.",
+    "description": "Hulu website built using NextJS and tailwindCSS. API used TMDB, deployed on vercel.",
+    "image": "/assets/images/projects/hulu.png",
+    "imageAlt": "Preview image for Hulu Website.",
+    "tags": [
+      "Web Project",
+      "Full Stack",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "portfolio-website",
+    "name": "Portfolio Website",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "Personal Portfolio Website. Don't Need Much Info About It, Just Scroll Down. You're Here Only!",
+    "description": "Personal Portfolio Website. Don't Need Much Info About It, Just Scroll Down. You're Here Only!",
+    "image": "/assets/images/projects/portfolio1.PNG",
+    "imageAlt": "Preview image for Portfolio Website.",
+    "tags": [
+      "Web Project",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "composey-website",
+    "name": "Composey Website",
+    "featured": true,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "Simple landing page website built using HTML, CSS, JavaScript and some JavaScript Libraries.",
+    "description": "Simple landing page website built using HTML, CSS, JavaScript and some JavaScript Libraries.",
+    "image": "/assets/images/projects/composey.png",
+    "imageAlt": "Preview image for Composey Website.",
+    "tags": [
+      "Web Project",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "https://composey.netlify.app/",
+      "demo": "https://composey.netlify.app/"
+    }
+  },
+  {
+    "id": "webview-app",
+    "name": "Webview App",
+    "featured": false,
+    "category": "mobile",
+    "label": "Mobile App",
+    "summary": "It's an android app which uses web view component for displaying content. This app provides many different features.",
+    "description": "It's an android app which uses web view component for displaying content. This app provides many different features.",
+    "image": "/assets/images/projects/webviewapp.PNG",
+    "imageAlt": "Preview image for Webview App.",
+    "tags": [
+      "Web Project",
+      "Mobile App",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "php-banking-website",
+    "name": "PHP Banking Website",
+    "featured": false,
+    "category": "fullstack",
+    "label": "LAMP",
+    "summary": "Basic Banking System based on PHP and MySQL database. Made with HTML, CSS, JavaScript and backend with PHP.",
+    "description": "Basic Banking System based on PHP and MySQL database. Made with HTML, CSS, JavaScript and backend with PHP.",
+    "image": "/assets/images/projects/tsfbank.png",
+    "imageAlt": "Preview image for PHP Banking Website.",
+    "tags": [
+      "PHP",
+      "LAMP",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "https://tsfbank.rf.gd",
+      "demo": "https://tsfbank.rf.gd"
+    }
+  },
+  {
+    "id": "bootstrap-portfolio",
+    "name": "Bootstrap Portfolio",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "Portfolio built using HTML, CSS, Bootstrap, SASS and JavaScript. Customized Bootstrap using SCSS.",
+    "description": "Portfolio built using HTML, CSS, Bootstrap, SASS and JavaScript. Customized Bootstrap using SCSS.",
+    "image": "/assets/images/projects/bootstrapportfolio.png",
+    "imageAlt": "Preview image for Bootstrap Portfolio.",
+    "tags": [
+      "Bootstrap",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "bootstrap-template",
+    "name": "Bootstrap Template",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "Basic website template built using HTML and Bootstrap.",
+    "description": "Basic website template built using HTML and Bootstrap.",
+    "image": "/assets/images/projects/bootstraptemplate.png",
+    "imageAlt": "Preview image for Bootstrap Template.",
+    "tags": [
+      "Bootstrap",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "foodicious",
+    "name": "Foodicious",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "Basic food website landing page built using HTML, CSS and JavaScript.",
+    "description": "Basic food website landing page built using HTML, CSS and JavaScript.",
+    "image": "/assets/images/projects/foodicious.png",
+    "imageAlt": "Preview image for Foodicious.",
+    "tags": [
+      "Web Project",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "food-website",
+    "name": "Food Website",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "Basic food website landing page built using HTML, CSS, SASS, Bootstrap and jQuery.",
+    "description": "Basic food website landing page built using HTML, CSS, SASS, Bootstrap and jQuery.",
+    "image": "/assets/images/projects/foodwebsite.png",
+    "imageAlt": "Preview image for Food Website.",
+    "tags": [
+      "Web Project",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "webchat-website",
+    "name": "WebChat Website",
+    "featured": false,
+    "category": "fullstack",
+    "label": "Full Stack",
+    "summary": "It's a web based chat app made using popular javaScript library Socket IO. Allows multiple users to connect.",
+    "description": "It's a web based chat app made using popular javaScript library Socket IO. Allows multiple users to connect.",
+    "image": "/assets/images/projects/webchat.PNG",
+    "imageAlt": "Preview image for WebChat Website.",
+    "tags": [
+      "Web Project",
+      "Full Stack",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "basic-banking-app",
+    "name": "Basic Banking App",
+    "featured": false,
+    "category": "mobile",
+    "label": "Mobile App",
+    "summary": "It's an android app which uses SQLite to store user accounts data. It provides feature to simply transact amount.",
+    "description": "It's an android app which uses SQLite to store user accounts data. It provides feature to simply transact amount.",
+    "image": "/assets/images/projects/basicbank.PNG",
+    "imageAlt": "Preview image for Basic Banking App.",
+    "tags": [
+      "Web Project",
+      "Mobile App",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "javascript-issue-tracker",
+    "name": "JavaScript Issue Tracker",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "It provides the feature to Assign Issue With The Auto Generated Id By Using ChanceJS. Uses Local Storage.",
+    "description": "It provides the feature to Assign Issue With The Auto Generated Id By Using ChanceJS. Uses Local Storage.",
+    "image": "/assets/images/projects/issuetrack.PNG",
+    "imageAlt": "Preview image for JavaScript Issue Tracker.",
+    "tags": [
+      "Web Project",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "php-pbl-portal",
+    "name": "PHP PBL Portal",
+    "featured": false,
+    "category": "fullstack",
+    "label": "LAMP",
+    "summary": "A simple portal in which students can submit their PBL projects and faculties can view by access admin panel.",
+    "description": "A simple portal in which students can submit their PBL projects and faculties can view by access admin panel.",
+    "image": "/assets/images/projects/phppblform.png",
+    "imageAlt": "Preview image for PHP PBL Portal.",
+    "tags": [
+      "PHP",
+      "LAMP",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "link-list",
+    "name": "Link List",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "All major profile links in a single website. It's just like clone of link tree. Personalized and Responsive.",
+    "description": "All major profile links in a single website. It's just like clone of link tree. Personalized and Responsive.",
+    "image": "/assets/images/projects/linklist.PNG",
+    "imageAlt": "Preview image for Link List.",
+    "tags": [
+      "Web Project",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "job-finder-dummy",
+    "name": "Job Finder Dummy",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "It Fetch JSON Data And Allow Feature To Search Within The Content Displayed. Will be Developed By Using Live APIs.",
+    "description": "It Fetch JSON Data And Allow Feature To Search Within The Content Displayed. Will be Developed By Using Live APIs.",
+    "image": "/assets/images/projects/saas.PNG",
+    "imageAlt": "Preview image for Job Finder Dummy.",
+    "tags": [
+      "Web Project",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "old-websites",
+    "name": "Old Websites",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "Bestwebs & ColorCoder. Two Years old websites memories. Simple with basic features.",
+    "description": "Bestwebs & ColorCoder. Two Years old websites memories. Simple with basic features.",
+    "image": "/assets/images/projects/oldsites.png",
+    "imageAlt": "Preview image for Old Websites.",
+    "tags": [
+      "Web Project",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "resistor-color-codes",
+    "name": "Resistor Color Codes",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "Simply provides the color codes of resistors. Calculation information and about resistors.",
+    "description": "Simply provides the color codes of resistors. Calculation information and about resistors.",
+    "image": "/assets/images/projects/resistercolor.PNG",
+    "imageAlt": "Preview image for Resistor Color Codes.",
+    "tags": [
+      "Web Project",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "kia-info-website",
+    "name": "KIA Info Website",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "Basic KIA webpage displays the info about seltos product range. Specs and Image Gallery.",
+    "description": "Basic KIA webpage displays the info about seltos product range. Specs and Image Gallery.",
+    "image": "/assets/images/projects/kiaweb.PNG",
+    "imageAlt": "Preview image for KIA Info Website.",
+    "tags": [
+      "Web Project",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "burger-shop-dummy",
+    "name": "Burger Shop Dummy",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "Basic burger shop webpage allow users to check menu and price. Dummy Order Form.",
+    "description": "Basic burger shop webpage allow users to check menu and price. Dummy Order Form.",
+    "image": "/assets/images/projects/burgerweb.PNG",
+    "imageAlt": "Preview image for Burger Shop Dummy.",
+    "tags": [
+      "Web Project",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  },
+  {
+    "id": "indian-temples",
+    "name": "Indian Temples",
+    "featured": false,
+    "category": "frontend",
+    "label": "Frontend",
+    "summary": "It shows temples of different sectors of India. as user clicks it will redirect to wiki of that temple for info.",
+    "description": "It shows temples of different sectors of India. as user clicks it will redirect to wiki of that temple for info.",
+    "image": "/assets/images/projects/templeweb.PNG",
+    "imageAlt": "Preview image for Indian Temples.",
+    "tags": [
+      "Web Project",
+      "Frontend",
+      "Portfolio"
+    ],
+    "links": {
+      "code": "",
+      "demo": ""
+    }
+  }
+]

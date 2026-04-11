@@ -1,128 +1,160 @@
-$(document).ready(function () {
+let projectCatalog = [];
+let activeFilter = "all";
+let isFallbackCatalog = false;
+const GITHUB_PORTFOLIO_USERNAME = "sumitverma7755";
 
-    $('#menu').click(function () {
-        $(this).toggleClass('fa-times');
-        $('.navbar').toggleClass('nav-toggle');
+function setMenuState(isOpen) {
+    const menuButton = $("#menu");
+    const navbar = $(".navbar");
+
+    menuButton.toggleClass("fa-times", isOpen);
+    navbar.toggleClass("nav-toggle", isOpen);
+    menuButton.attr("aria-expanded", String(isOpen));
+    menuButton.attr("aria-label", isOpen ? "Close navigation menu" : "Open navigation menu");
+}
+
+function updateScrollTopButton() {
+    const scrollTopButton = document.querySelector("#scroll-top");
+
+    if (!scrollTopButton) {
+        return;
+    }
+
+    scrollTopButton.classList.toggle("active", window.scrollY > 60);
+}
+
+function setProjectsStatus(message, isError = false) {
+    const status = document.getElementById("projectsStatus");
+
+    if (!status) {
+        return;
+    }
+
+    status.textContent = message;
+    status.classList.toggle("is-hidden", !message);
+    status.classList.toggle("is-error", isError);
+}
+
+function setFilterState(filter) {
+    activeFilter = filter;
+
+    document.querySelectorAll("#filters .btn").forEach((button) => {
+        const isActive = button.dataset.filter === filter;
+        button.classList.toggle("is-active", isActive);
+        button.setAttribute("aria-pressed", String(isActive));
+    });
+}
+
+function renderProjects(filter = "all") {
+    const container = document.getElementById("projectsContainer");
+
+    if (!container) {
+        return;
+    }
+
+    const projects = window.PortfolioProjectCatalog
+        ? window.PortfolioProjectCatalog.filterByCategory(projectCatalog, filter)
+        : [];
+
+    if (!projects.length) {
+        container.innerHTML = '<p class="projects-empty">No projects match this filter yet.</p>';
+        setProjectsStatus(
+            isFallbackCatalog ? "Showing saved project list while GitHub sync is unavailable." : "",
+            false
+        );
+        return;
+    }
+
+    window.PortfolioProjectCatalog.render(container, projects);
+    setProjectsStatus(
+        isFallbackCatalog ? "Showing saved project list while GitHub sync is unavailable." : "",
+        false
+    );
+    srtop.reveal(".work .box", { interval: 120 });
+}
+
+async function initProjectArchive() {
+    const container = document.getElementById("projectsContainer");
+
+    if (!container || !window.PortfolioProjectCatalog) {
+        return;
+    }
+
+    try {
+        try {
+            projectCatalog = await window.PortfolioProjectCatalog.loadGitHubProjects(GITHUB_PORTFOLIO_USERNAME, {
+                featuredCount: 4,
+            });
+            isFallbackCatalog = false;
+        } catch (githubError) {
+            console.warn("GitHub sync failed. Falling back to local project catalog.", githubError);
+            projectCatalog = await window.PortfolioProjectCatalog.load("../assets/data/projects.json");
+            isFallbackCatalog = true;
+        }
+
+        renderProjects(activeFilter);
+    } catch (error) {
+        console.error(error);
+        container.innerHTML = "";
+        setProjectsStatus("Project archive could not be loaded right now. Please refresh and try again.", true);
+    }
+}
+
+function initChatWidget() {
+    var Tawk_API = window.Tawk_API || {}, Tawk_LoadStart = new Date();
+    window.Tawk_API = Tawk_API;
+
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = "https://embed.tawk.to/60df10bf7f4b000ac03ab6a8/1f9jlirg6";
+        s1.charset = "UTF-8";
+        s1.setAttribute("crossorigin", "*");
+        s0.parentNode.insertBefore(s1, s0);
+    })();
+}
+
+$(document).ready(function () {
+    $("#menu").on("click", function () {
+        setMenuState(!$(this).hasClass("fa-times"));
     });
 
-    $(window).on('scroll load', function () {
-        $('#menu').removeClass('fa-times');
-        $('.navbar').removeClass('nav-toggle');
+    $("#filters").on("click", ".btn", function () {
+        const filter = $(this).data("filter");
+        setFilterState(filter);
+        renderProjects(filter);
+    });
 
-        if (window.scrollY > 60) {
-            document.querySelector('#scroll-top').classList.add('active');
-        } else {
-            document.querySelector('#scroll-top').classList.remove('active');
+    $(window).on("scroll load", function () {
+        if (!$("#menu").is(":focus")) {
+            setMenuState(false);
         }
+
+        updateScrollTopButton();
     });
 });
 
-document.addEventListener('visibilitychange',
-    function () {
-        if (document.visibilityState === "visible") {
-            document.title = "Projects | Sumit Kumar Verma";
-            $("#favicon").attr("href", "/assets/images/favicon.png");
-        }
-        else {
-            document.title = "Come Back To Portfolio";
-            $("#favicon").attr("href", "/assets/images/favhand.png");
-        }
-    });
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") {
+        document.title = "Projects | Sumit Kumar Verma";
+        $("#favicon").attr("href", "../assets/images/favicon.png");
+    } else {
+        document.title = "Come Back To Portfolio";
+        $("#favicon").attr("href", "../assets/images/favhand.png");
+    }
+});
 
+setFilterState(activeFilter);
+initProjectArchive();
+initChatWidget();
 
-// fetch projects start
-function getProjects() {
-    return fetch("projects.json")
-        .then(response => response.json())
-        .then(data => {
-            return data
-        });
-}
+const srtop = ScrollReveal({
+    origin: "top",
+    distance: "80px",
+    duration: 1000,
+    reset: true,
+});
 
-
-function showProjects(projects) {
-    let projectsContainer = document.querySelector(".work .box-container");
-    let projectsHTML = "";
-
-    const isUsableLink = (url) => typeof url === "string" && url.trim() !== "" && url.trim() !== "#";
-
-    projects.forEach(project => {
-        const viewBtn = isUsableLink(project.links?.view)
-            ? `<a href="${project.links.view}" class="btn" target="_blank" rel="noopener noreferrer"><i class="fas fa-eye"></i> View</a>`
-            : "";
-        const codeBtn = isUsableLink(project.links?.code)
-            ? `<a href="${project.links.code}" class="btn" target="_blank" rel="noopener noreferrer">Code <i class="fas fa-code"></i></a>`
-            : "";
-        const actionButtons = (viewBtn || codeBtn)
-            ? `<div class="btns">${viewBtn}${codeBtn}</div>`
-            : `<p class="no-links">Links available on request.</p>`;
-
-        projectsHTML += `
-        <div class="grid-item ${project.category}">
-        <div class="box tilt" style="width: 380px; margin: 1rem">
-      <img draggable="false" src="/assets/images/projects/${project.image}.png" alt="project" />
-      <div class="content">
-        <div class="tag">
-        <h3>${project.name}</h3>
-        </div>
-        <div class="desc">
-          <p>${project.desc}</p>
-          ${actionButtons}
-        </div>
-      </div>
-    </div>
-    </div>`
-    });
-    projectsContainer.innerHTML = projectsHTML;
-
-    // vanilla tilt.js
-    // VanillaTilt.init(document.querySelectorAll(".tilt"), {
-    //     max: 20,
-    // });
-    // // vanilla tilt.js  
-
-    // /* ===== SCROLL REVEAL ANIMATION ===== */
-    // const srtop = ScrollReveal({
-    //     origin: 'bottom',
-    //     distance: '80px',
-    //     duration: 1000,
-    //     reset: true
-    // });
-
-    // /* SCROLL PROJECTS */
-    // srtop.reveal('.work .box', { interval: 200 });
-
-    // isotope filter products
-    var $grid = $('.box-container').isotope({
-        itemSelector: '.grid-item',
-        layoutMode: 'fitRows',
-        masonry: {
-            columnWidth: 200
-        }
-    });
-
-    // filter items on button click
-    $('.button-group').on('click', 'button', function () {
-        $('.button-group').find('.is-checked').removeClass('is-checked');
-        $(this).addClass('is-checked');
-        var filterValue = $(this).attr('data-filter');
-        $grid.isotope({ filter: filterValue });
-    });
-}
-
-getProjects().then(data => {
-    showProjects(data);
-})
-// fetch projects end
-
-// Start of Tawk.to Live Chat
-var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-(function () {
-    var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-    s1.async = true;
-    s1.src = 'https://embed.tawk.to/60df10bf7f4b000ac03ab6a8/1f9jlirg6';
-    s1.charset = 'UTF-8';
-    s1.setAttribute('crossorigin', '*');
-    s0.parentNode.insertBefore(s1, s0);
-})();
-// End of Tawk.to Live Chat
+srtop.reveal(".work .section-head", { delay: 180 });
+srtop.reveal(".work .button-group", { delay: 220 });
+srtop.reveal(".work .backbtn", { delay: 260 });

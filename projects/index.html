@@ -4,68 +4,72 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <meta name="description" content="Browse the live GitHub repository archive for Sumit Kumar Verma, organized across full-stack, frontend, and mobile project types." />
+    <meta name="theme-color" content="#101942" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Projects | Sumit Kumar Verma" />
+    <meta property="og:description" content="Curated project archive featuring full-stack systems, frontend builds, and mobile app work." />
+    <meta property="og:url" content="https://sumitverma7755.github.io/portfolio-website/projects/" />
+    <meta property="og:image" content="https://sumitverma7755.github.io/portfolio-website/assets/images/projects/portfolio1.PNG" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Projects | Sumit Kumar Verma" />
+    <meta name="twitter:description" content="Explore Sumit Kumar Verma's featured GitHub projects with previews, tags, and direct links." />
+    <meta name="twitter:image" content="https://sumitverma7755.github.io/portfolio-website/assets/images/projects/portfolio1.PNG" />
+    <link rel="canonical" href="https://sumitverma7755.github.io/portfolio-website/projects/" />
+    <link rel="stylesheet" href="../assets/css/style.css?v=20260411a">
+    <link rel="stylesheet" href="./style.css?v=20260411a">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link id='favicon' rel="shortcut icon" href="/assets/images/favicon.png" type="image/x-png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link id='favicon' rel="shortcut icon" href="../assets/images/favicon.png" type="image/x-png">
     <title>Projects | Sumit Kumar Verma</title>
 </head>
 <body>
 
+<a class="skip-link" href="#main-content">Skip to main content</a>
+
 <!-- navbar starts -->
 <header>
-        <a href="/" class="logo"><i class="fab fa-node-js"></i> Sumit Kumar Verma</a>
+        <a href="../index.html" class="logo"><i class="fab fa-node-js"></i> Sumit</a>
 
-        <div id="menu" class="fas fa-bars"></div>
-        <nav class="navbar">
+        <button id="menu" class="fas fa-bars" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="primary-navigation"></button>
+        <nav class="navbar" id="primary-navigation">
             <ul>
-            <li><a href="/#home">Home</a></li>
-            <li><a href="/#about">About</a></li>
-            <li><a href="/#skills">Skills</a></li>
-            <li><a href="/#education">Education</a></li>
-            <li><a class="active" href="/projects">Projects</a></li>
-            <li><a href="/experience">Experience</a></li>
-            <li><a href="/#contact">Contact</a></li>
+            <li><a href="../index.html#home">Home</a></li>
+            <li><a href="../index.html#about">About</a></li>
+            <li><a href="../index.html#skills">Skills</a></li>
+            <li><a href="../index.html#education">Education</a></li>
+            <li><a class="active" href="../projects/">Projects</a></li>
+            <li><a href="../experience/">Experience</a></li>
+            <li><a href="../index.html#contact">Contact</a></li>
             </ul>
         </nav>
 </header>
 <!-- navbar ends -->
 
-<!-- work project section starts -->
-<section class="work" id="work">
+<main id="main-content">
 
-  <h2 class="heading"><i class="fas fa-laptop-code"></i> Projects <span>Made</span></h2>
+<!-- work project section starts -->
+<section class="work work-page" id="work">
+
+  <div class="section-head">
+    <h2 class="heading"><i class="fas fa-laptop-code"></i> Project <span>Archive</span></h2>
+    <p class="work-copy">A live repository archive synced from GitHub and organized to surface standout full-stack, frontend, and mobile work quickly.</p>
+  </div>
   
   <div id="filters" class="button-group">
-    <button class="btn is-checked" data-filter="*">All Projects</button>
-    <button class="btn" data-filter=".mern">MERN Stack</button>
-    <button class="btn" data-filter=".lamp">LAMP Stack</button>
-    <button class="btn" data-filter=".basicweb">Basic Web</button>
-    <button class="btn" data-filter=".android">Android App</button>
+    <button class="btn is-active" type="button" data-filter="all" aria-pressed="true">All Projects</button>
+    <button class="btn" type="button" data-filter="featured" aria-pressed="false">Featured</button>
+    <button class="btn" type="button" data-filter="fullstack" aria-pressed="false">Full Stack</button>
+    <button class="btn" type="button" data-filter="frontend" aria-pressed="false">Frontend</button>
+    <button class="btn" type="button" data-filter="mobile" aria-pressed="false">Mobile</button>
   </div>
 
-  <div class="box-container">
+  <p class="projects-status" id="projectsStatus" role="status" aria-live="polite">Loading project archive...</p>
 
-    <!-- <div class="box tilt">
-      <img src="/assets/images/projects/agecalc.PNG" alt="" />
-      <div class="content">
-        <div class="tag">
-        <h3>Portfolio Website</h3>
-        </div>
-        <div class="desc">
-          <p>Personal portfolio website. Don't need much info about it, just scroll down. You're here only!</p>
-          <div class="btns">
-            <a href="#" class="btn" target="_blank" rel="noopener noreferrer"><i class="fas fa-eye"></i> View</a>
-            <a href="#" class="btn" target="_blank" rel="noopener noreferrer">Code <i class="fas fa-code"></i></a>
-          </div>
-        </div>
-      </div>
-    </div> -->   
-
-  </div>
+  <div class="box-container" id="projectsContainer"></div>
 
   <div class="backbtn">
-    <a href="/#home" class="btn">
+    <a href="../index.html#work" class="btn">
         <i class="fas fa-arrow-left"></i>
         <span>Back to Home</span>
   </a>
@@ -74,8 +78,10 @@
 </section>
 <!-- work project section ends -->
 
+</main>
+
 <!-- scroll top btn -->
-<a href="#work" class="fas fa-angle-up" id="scroll-top"></a>
+<a href="#work" class="fas fa-angle-up" id="scroll-top" aria-label="Scroll to top"></a>
 <!-- scroll back to top -->
 
 
@@ -83,17 +89,12 @@
 <!-- jquery cdn -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-<!-- vanilla tilt.js links -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js" integrity="sha512-SttpKhJqONuBVxbRcuH0wezjuX+BoFoli0yPsnrAADcHsQMW8rkR84ItFHGIkPvhnlRnE2FaifDOUw+EltbuHg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 <!-- scroll reveal anim -->
 <script src="https://unpkg.com/scrollreveal"></script>
 
-<!-- isotope filter plugin cdn -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
 <!-- ==== ALL MAJOR JAVASCRIPT CDNS ENDS ==== -->
 
+<script src="../assets/js/project-catalog.js"></script>
 <script src="./script.js"></script>
 
 </body>

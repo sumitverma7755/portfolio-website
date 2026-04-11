@@ -1,243 +1,258 @@
-$(document).ready(function () {
+function setMenuState(isOpen) {
+    const menuButton = $("#menu");
+    const navbar = $(".navbar");
 
-    $('#menu').click(function () {
-        $(this).toggleClass('fa-times');
-        $('.navbar').toggleClass('nav-toggle');
-    });
-
-    $(window).on('scroll load', function () {
-        $('#menu').removeClass('fa-times');
-        $('.navbar').removeClass('nav-toggle');
-
-        if (window.scrollY > 60) {
-            document.querySelector('#scroll-top').classList.add('active');
-        } else {
-            document.querySelector('#scroll-top').classList.remove('active');
-        }
-
-        // scroll spy
-        $('section').each(function () {
-            let height = $(this).height();
-            let offset = $(this).offset().top - 200;
-            let top = $(window).scrollTop();
-            let id = $(this).attr('id');
-
-            if (top > offset && top < offset + height) {
-                $('.navbar ul li a').removeClass('active');
-                $('.navbar').find(`[href="#${id}"]`).addClass('active');
-            }
-        });
-    });
-
-    // smooth scrolling
-    $('a[href*="#"]').on('click', function (e) {
-        e.preventDefault();
-        $('html, body').animate({
-            scrollTop: $($(this).attr('href')).offset().top,
-        }, 500, 'linear')
-    });
-
-    // <!-- emailjs to mail contact form data -->
-    $("#contact-form").submit(function (event) {
-        emailjs.init("user_TTDmetQLYgWCLzHTDgqxm");
-
-        emailjs.sendForm('contact_service', 'template_contact', '#contact-form')
-            .then(function (response) {
-                console.log('SUCCESS!', response.status, response.text);
-                document.getElementById("contact-form").reset();
-                alert("Form Submitted Successfully");
-            }, function (error) {
-                console.log('FAILED...', error);
-                alert("Form Submission Failed! Try Again");
-            });
-        event.preventDefault();
-    });
-    // <!-- emailjs to mail contact form data -->
-
-});
-
-document.addEventListener('visibilitychange',
-    function () {
-        if (document.visibilityState === "visible") {
-            document.title = "Portfolio | Sumit Kumar Verma";
-            $("#favicon").attr("href", "assets/images/favicon.png");
-        }
-        else {
-            document.title = "Come Back To Portfolio";
-            $("#favicon").attr("href", "assets/images/favhand.png");
-        }
-    });
-
-
-// <!-- typed js effect starts -->
-var typed = new Typed(".typing-text", {
-    strings: ["frontend development", "backend development", "web designing", "android development", "web development"],
-    loop: true,
-    typeSpeed: 50,
-    backSpeed: 25,
-    backDelay: 500,
-});
-// <!-- typed js effect ends -->
-
-async function fetchData(type = "skills") {
-    let response
-    type === "skills" ?
-        response = await fetch("skills.json")
-        :
-        response = await fetch("./projects/projects.json")
-    const data = await response.json();
-    return data;
+    menuButton.toggleClass("fa-times", isOpen);
+    navbar.toggleClass("nav-toggle", isOpen);
 }
 
-function showSkills(skills) {
-    let skillsContainer = document.getElementById("skillsContainer");
-    let skillHTML = "";
-    skills.forEach(skill => {
-        skillHTML += `
-        <div class="bar">
-              <div class="info">
-                <img src=${skill.icon} alt="skill" />
-                <span>${skill.name}</span>
-              </div>
-            </div>`
-    });
-    skillsContainer.innerHTML = skillHTML;
-}
+const GITHUB_PORTFOLIO_USERNAME = "sumitverma7755";
 
-function showProjects(projects) {
-    let projectsContainer = document.querySelector("#work .box-container");
-    if (!projectsContainer) {
+function updateScrollTopButton() {
+    const scrollTopButton = document.querySelector("#scroll-top");
+
+    if (!scrollTopButton) {
         return;
     }
-    let projectHTML = "";
 
-    const isUsableLink = (url) => typeof url === "string" && url.trim() !== "" && url.trim() !== "#";
+    scrollTopButton.classList.toggle("active", window.scrollY > 60);
+}
 
-    projects.slice(0, 10).filter(project => project.category != "android").forEach(project => {
-        const viewBtn = isUsableLink(project.links?.view)
-            ? `<a href="${project.links.view}" class="btn" target="_blank" rel="noopener noreferrer"><i class="fas fa-eye"></i> View</a>`
-            : "";
-        const codeBtn = isUsableLink(project.links?.code)
-            ? `<a href="${project.links.code}" class="btn" target="_blank" rel="noopener noreferrer">Code <i class="fas fa-code"></i></a>`
-            : "";
-        const actionButtons = (viewBtn || codeBtn)
-            ? `<div class="btns">${viewBtn}${codeBtn}</div>`
-            : `<p class="no-links">Links available on request.</p>`;
+function updateScrollSpy() {
+    $("section[id]").each(function () {
+        const height = $(this).outerHeight();
+        const offset = $(this).offset().top - 200;
+        const top = $(window).scrollTop();
+        const id = $(this).attr("id");
 
-        projectHTML += `
-        <div class="box tilt">
-      <img draggable="false" src="/assets/images/projects/${project.image}.png" alt="project" />
-      <div class="content">
-        <div class="tag">
-        <h3>${project.name}</h3>
-        </div>
-        <div class="desc">
-          <p>${project.desc}</p>
-          ${actionButtons}
-        </div>
-      </div>
-    </div>`
+        if (top >= offset && top < offset + height) {
+            $(".navbar ul li a").removeClass("active");
+            $(`.navbar a[href="#${id}"]`).addClass("active");
+        }
     });
-    projectsContainer.innerHTML = projectHTML;
+}
 
-    // <!-- tilt js effect starts -->
+function renderSkills(skills) {
+    const skillsContainer = document.getElementById("skillsContainer");
+
+    if (!skillsContainer) {
+        return;
+    }
+
+    const html = skills.map((skill) => `
+        <div class="bar">
+          <div class="info">
+            <img src="${skill.icon}" alt="${skill.name} logo" />
+            <span>${skill.name}</span>
+          </div>
+        </div>
+    `).join("");
+
+    skillsContainer.innerHTML = html;
+}
+
+function setProjectsStatus(message, isError = false) {
+    const status = document.getElementById("projectsStatus");
+
+    if (!status) {
+        return;
+    }
+
+    status.textContent = message;
+    status.classList.toggle("is-hidden", !message);
+    status.classList.toggle("is-error", isError);
+}
+
+async function loadSkills() {
+    const response = await fetch("./skills.json");
+
+    if (!response.ok) {
+        throw new Error(`Unable to load skills: ${response.status}`);
+    }
+
+    const data = await response.json();
+    renderSkills(data);
+}
+
+async function loadFeaturedProjects() {
+    const projectsContainer = document.getElementById("projectsContainer");
+
+    if (!projectsContainer || !window.PortfolioProjectCatalog) {
+        return;
+    }
+
+    try {
+        let projects = [];
+        let usedFallbackCatalog = false;
+
+        try {
+            projects = await window.PortfolioProjectCatalog.loadGitHubProjects(GITHUB_PORTFOLIO_USERNAME, {
+                featuredCount: 4,
+            });
+        } catch (githubError) {
+            console.warn("GitHub sync failed. Falling back to local project catalog.", githubError);
+            projects = await window.PortfolioProjectCatalog.load("./assets/data/projects.json");
+            usedFallbackCatalog = true;
+        }
+
+        const featuredProjects = window.PortfolioProjectCatalog.getFeatured(projects, 4);
+
+        if (!featuredProjects.length) {
+            setProjectsStatus("Featured projects will be published here soon.", false);
+            projectsContainer.innerHTML = "";
+            return;
+        }
+
+        window.PortfolioProjectCatalog.render(projectsContainer, featuredProjects);
+        setProjectsStatus(
+            usedFallbackCatalog ? "Showing saved project list while GitHub sync is unavailable." : "",
+            false
+        );
+        srtop.reveal(".work .box", { interval: 120 });
+    } catch (error) {
+        console.error(error);
+        projectsContainer.innerHTML = "";
+        setProjectsStatus("Projects could not be loaded right now. Please try again shortly.", true);
+    }
+}
+
+function initContactForm() {
+    const form = document.getElementById("contact-form");
+
+    if (!form) {
+        return;
+    }
+
+    form.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        if (!window.emailjs) {
+            alert("Contact form service is unavailable right now. Please try again later.");
+            return;
+        }
+
+        emailjs.init("user_TTDmetQLYgWCLzHTDgqxm");
+
+        emailjs.sendForm("contact_service", "template_contact", "#contact-form")
+            .then(function () {
+                form.reset();
+                alert("Form Submitted Successfully");
+            })
+            .catch(function () {
+                alert("Form Submission Failed! Try Again");
+            });
+    });
+}
+
+function initTypingEffect() {
+    if (!document.querySelector(".typing-text")) {
+        return;
+    }
+
+    new Typed(".typing-text", {
+        strings: ["frontend development", "backend development", "web designing", "android development", "web development"],
+        loop: true,
+        typeSpeed: 50,
+        backSpeed: 25,
+        backDelay: 500,
+    });
+}
+
+function initTilt() {
+    if (!window.VanillaTilt) {
+        return;
+    }
+
     VanillaTilt.init(document.querySelectorAll(".tilt"), {
         max: 15,
     });
-    // <!-- tilt js effect ends -->
-
-    /* ===== SCROLL REVEAL ANIMATION ===== */
-    const srtop = ScrollReveal({
-        origin: 'top',
-        distance: '80px',
-        duration: 1000,
-        reset: true
-    });
-
-    /* SCROLL PROJECTS */
-    srtop.reveal('.work .box', { interval: 200 });
-
 }
 
-fetchData().then(data => {
-    showSkills(data);
-});
+function initChatWidget() {
+    var Tawk_API = window.Tawk_API || {}, Tawk_LoadStart = new Date();
+    window.Tawk_API = Tawk_API;
 
-if (document.querySelector("#work .box-container")) {
-    fetchData("projects").then(data => {
-        showProjects(data);
-    });
+    (function () {
+        var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+        s1.async = true;
+        s1.src = "https://embed.tawk.to/60df10bf7f4b000ac03ab6a8/1f9jlirg6";
+        s1.charset = "UTF-8";
+        s1.setAttribute("crossorigin", "*");
+        s0.parentNode.insertBefore(s1, s0);
+    })();
 }
 
-// <!-- tilt js effect starts -->
-VanillaTilt.init(document.querySelectorAll(".tilt"), {
-    max: 15,
+$(document).ready(function () {
+    $("#menu").on("click", function () {
+        setMenuState(!$(this).hasClass("fa-times"));
+    });
+
+    $(".navbar a[href^='#']").on("click", function () {
+        setMenuState(false);
+    });
+
+    $(window).on("scroll load", function () {
+        if (!$("#menu").is(":focus")) {
+            setMenuState(false);
+        }
+
+        updateScrollTopButton();
+        updateScrollSpy();
+    });
+
+    $("a[href^='#']").on("click", function (event) {
+        const targetSelector = $(this).attr("href");
+        const targetElement = targetSelector ? document.querySelector(targetSelector) : null;
+
+        if (!targetElement) {
+            return;
+        }
+
+        event.preventDefault();
+        $("html, body").animate({
+            scrollTop: $(targetElement).offset().top,
+        }, 500, "linear");
+    });
+
+    initContactForm();
 });
-// <!-- tilt js effect ends -->
 
+document.addEventListener("visibilitychange", function () {
+    if (document.visibilityState === "visible") {
+        document.title = "Portfolio | Sumit Kumar Verma";
+        $("#favicon").attr("href", "assets/images/favicon.png");
+    } else {
+        document.title = "Come Back To Portfolio";
+        $("#favicon").attr("href", "assets/images/favhand.png");
+    }
+});
 
-// pre loader start
-// function loader() {
-//     document.querySelector('.loader-container').classList.add('fade-out');
-// }
-// function fadeOut() {
-//     setInterval(loader, 500);
-// }
-// window.onload = fadeOut;
-// pre loader end
+loadSkills().catch((error) => console.error(error));
+loadFeaturedProjects();
+initTypingEffect();
+initTilt();
+initChatWidget();
 
-// Start of Tawk.to Live Chat
-var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
-(function () {
-    var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
-    s1.async = true;
-    s1.src = 'https://embed.tawk.to/60df10bf7f4b000ac03ab6a8/1f9jlirg6';
-    s1.charset = 'UTF-8';
-    s1.setAttribute('crossorigin', '*');
-    s0.parentNode.insertBefore(s1, s0);
-})();
-// End of Tawk.to Live Chat
-
-
-/* ===== SCROLL REVEAL ANIMATION ===== */
 const srtop = ScrollReveal({
-    origin: 'top',
-    distance: '80px',
+    origin: "top",
+    distance: "80px",
     duration: 1000,
-    reset: true
+    reset: true,
 });
 
-/* SCROLL HOME */
-srtop.reveal('.home .content h2', { delay: 200 });
-srtop.reveal('.home .content p', { delay: 200 });
-srtop.reveal('.home .content .btn', { delay: 200 });
-
-srtop.reveal('.home .image', { delay: 400 });
-srtop.reveal('.home .linkedin', { interval: 600 });
-srtop.reveal('.home .instagram', { interval: 600 });
-
-/* SCROLL ABOUT */
-srtop.reveal('.about .content h3', { delay: 200 });
-srtop.reveal('.about .content .tag', { delay: 200 });
-srtop.reveal('.about .content p', { delay: 200 });
-srtop.reveal('.about .content .box-container', { delay: 200 });
-srtop.reveal('.about .content .resumebtn', { delay: 200 });
-
-
-/* SCROLL SKILLS */
-srtop.reveal('.skills .container', { interval: 200 });
-srtop.reveal('.skills .container .bar', { delay: 400 });
-
-/* SCROLL EDUCATION */
-srtop.reveal('.education .box', { interval: 200 });
-
-/* SCROLL PROJECTS */
-srtop.reveal('.work .box', { interval: 200 });
-
-/* SCROLL EXPERIENCE */
-srtop.reveal('.experience .timeline', { delay: 400 });
-srtop.reveal('.experience .timeline .container', { interval: 400 });
-
-/* SCROLL CONTACT */
-srtop.reveal('.contact .container', { delay: 400 });
-srtop.reveal('.contact .container .form-group', { delay: 400 });
+srtop.reveal(".home .content h2", { delay: 200 });
+srtop.reveal(".home .content p", { delay: 220 });
+srtop.reveal(".home .content .btn", { delay: 240 });
+srtop.reveal(".home .image", { delay: 320 });
+srtop.reveal(".home .social-icons li", { interval: 140 });
+srtop.reveal(".about .content h3", { delay: 200 });
+srtop.reveal(".about .content .tag", { delay: 220 });
+srtop.reveal(".about .content p", { delay: 240 });
+srtop.reveal(".about .content .box-container", { delay: 260 });
+srtop.reveal(".about .content .resumebtn", { delay: 280 });
+srtop.reveal(".skills .container", { delay: 180 });
+srtop.reveal(".skills .container .bar", { interval: 100 });
+srtop.reveal(".education .box", { interval: 160 });
+srtop.reveal(".work .section-head", { delay: 180 });
+srtop.reveal(".work .work-actions", { delay: 220 });
+srtop.reveal(".contact .container", { delay: 240 });
