@@ -103,7 +103,9 @@ async function loadFeaturedProjects() {
             return;
         }
 
-        window.PortfolioProjectCatalog.render(projectsContainer, featuredProjects);
+        window.PortfolioProjectCatalog.render(projectsContainer, featuredProjects, {
+            heroCard: false,
+        });
         setProjectsStatus(
             usedFallbackCatalog ? "Showing saved project list while GitHub sync is unavailable." : "",
             false

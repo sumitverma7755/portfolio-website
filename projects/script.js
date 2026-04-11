@@ -65,7 +65,9 @@ function renderProjects(filter = "all") {
         return;
     }
 
-    window.PortfolioProjectCatalog.render(container, projects);
+    window.PortfolioProjectCatalog.render(container, projects, {
+        heroCard: false,
+    });
     setProjectsStatus(
         isFallbackCatalog ? "Showing saved project list while GitHub sync is unavailable." : "",
         false

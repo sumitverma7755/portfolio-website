@@ -6,27 +6,32 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 1rem;
-  max-width: 96rem;
-  margin: 2.6rem auto 0;
+  gap: 1.1rem;
+  max-width: 104rem;
+  margin: 3rem auto 0;
 }
 
 .work-page .button-group .btn {
-  padding: 1rem 1.8rem;
+  padding: 1rem 1.9rem;
   border-radius: 999px;
-  border: 0.1rem solid #a68eff;
-  background: #ffffff;
-  color: #27304f;
-  font-size: 1.4rem;
+  border: 0.1rem solid rgba(94, 112, 255, 0.26);
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(0.8rem);
+  -webkit-backdrop-filter: blur(0.8rem);
+  color: #2d365d;
+  font-size: 1.35rem;
   font-weight: 700;
-  box-shadow: 0 1rem 2rem rgba(88, 100, 147, 0.08);
+  box-shadow: 0 1.2rem 2.1rem rgba(79, 98, 162, 0.11);
+  transition: transform 0.26s ease, box-shadow 0.26s ease, background 0.26s ease, color 0.26s ease;
 }
 
 .work-page .button-group .btn:hover,
 .work-page .button-group .btn.is-active {
-  background: #101942;
-  border-color: #101942;
+  background: linear-gradient(125deg, #7d68ff 0%, #4f89ff 50%, #2ec8ff 100%);
+  border-color: transparent;
   color: #ffffff;
+  box-shadow: 0 1.5rem 2.6rem rgba(59, 101, 233, 0.32);
+  transform: translateY(-0.2rem);
 }
 
 .work-page .projects-status {
@@ -45,18 +50,19 @@
 .backbtn {
   display: flex;
   justify-content: center;
-  margin-top: 3.2rem;
+  margin-top: 3.6rem;
 }
 
 .backbtn .btn {
   display: inline-flex;
   align-items: center;
   gap: 0.9rem;
-  padding: 1.5rem 2.4rem;
+  padding: 1.4rem 2.6rem;
   border-radius: 999px;
-  background: #101942;
+  background: linear-gradient(125deg, #7d68ff 0%, #4f89ff 48%, #2ec8ff 100%);
   color: #ffffff;
-  box-shadow: 0 1.6rem 3rem rgba(16, 25, 66, 0.18);
+  box-shadow: 0 1.8rem 3rem rgba(57, 104, 236, 0.33);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .backbtn .btn span {
@@ -65,7 +71,8 @@
 }
 
 .backbtn .btn:hover {
-  background: #6f43ff;
+  transform: translateY(-0.2rem);
+  box-shadow: 0 2.2rem 3.4rem rgba(57, 104, 236, 0.39);
 }
 
 @media (max-width: 768px) {
@@ -74,7 +81,7 @@
   }
 
   .work-page .button-group {
-    justify-content: flex-start;
+    justify-content: center;
   }
 
   .work-page .button-group .btn {

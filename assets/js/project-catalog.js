@@ -1,6 +1,7 @@
 window.PortfolioProjectCatalog = (function () {
     const githubRepoCache = new Map();
     const githubUserProjectsCache = new Map();
+    let cardRevealObserver = null;
 
     const CATEGORY_LABELS = {
         fullstack: "Full Stack",
@@ -89,6 +90,22 @@ window.PortfolioProjectCatalog = (function () {
         "realtime",
         "automation",
         "dashboard",
+    ];
+
+    const STACK_ICON_RULES = [
+        { label: "JavaScript", iconClass: "fab fa-js-square", keywords: ["javascript", " js ", "js "] },
+        { label: "TypeScript", iconClass: "fas fa-code", keywords: ["typescript", " ts ", "ts "] },
+        { label: "React", iconClass: "fab fa-react", keywords: ["react"] },
+        { label: "Node.js", iconClass: "fab fa-node-js", keywords: ["node", "express"] },
+        { label: "Python", iconClass: "fab fa-python", keywords: ["python", "jupyter"] },
+        { label: "Java", iconClass: "fab fa-java", keywords: ["java"] },
+        { label: "HTML5", iconClass: "fab fa-html5", keywords: ["html"] },
+        { label: "CSS3", iconClass: "fab fa-css3-alt", keywords: ["css", "sass", "tailwind", "bootstrap"] },
+        { label: "Database", iconClass: "fas fa-database", keywords: ["mongodb", "mysql", "postgres", "sqlite", "firebase", "database"] },
+        { label: "API", iconClass: "fas fa-plug", keywords: ["api", "rest"] },
+        { label: "Mobile", iconClass: "fas fa-mobile-alt", keywords: ["android", "kotlin", "ios", "mobile", "flutter", "react native", "expo"] },
+        { label: "AI / ML", iconClass: "fas fa-brain", keywords: ["ai", "ml", "machine learning", "deepfake", "prediction"] },
+        { label: "Cloud", iconClass: "fas fa-cloud", keywords: ["cloud", "docker", "vercel", "netlify", "aws"] },
     ];
 
     function escapeHtml(value = "") {
@@ -276,6 +293,47 @@ window.PortfolioProjectCatalog = (function () {
         const fallbackTag = CATEGORY_LABELS[category] ? [CATEGORY_LABELS[category]] : [];
 
         return Array.from(new Set([...topicTags, ...languageTag, ...fallbackTag])).slice(0, 4);
+    }
+
+    function getStackMatchText(project) {
+        return ` ${project?.category || ""} ${project?.label || ""} ${(project?.tags || []).join(" ")} `
+            .toLowerCase()
+            .replace(/[-_]+/g, " ");
+    }
+
+    function buildStackIcons(project, maxIcons = 5) {
+        const matchText = getStackMatchText(project);
+        const icons = [];
+
+        STACK_ICON_RULES.forEach((rule) => {
+            const matchesRule = rule.keywords.some((keyword) => matchText.includes(String(keyword).toLowerCase()));
+
+            if (matchesRule && !icons.some((icon) => icon.label === rule.label)) {
+                icons.push({
+                    label: rule.label,
+                    iconClass: rule.iconClass,
+                });
+            }
+        });
+
+        if (!icons.length) {
+            icons.push({
+                label: project?.label || "Project Stack",
+                iconClass: "fas fa-layer-group",
+            });
+        }
+
+        return icons.slice(0, maxIcons);
+    }
+
+    function renderStackIcons(project) {
+        const icons = buildStackIcons(project, 5);
+
+        return icons.map((item) => `
+            <span class="project-card__stack-icon" title="${escapeHtml(item.label)}" aria-label="${escapeHtml(item.label)}">
+                <i class="${escapeHtml(item.iconClass)}" aria-hidden="true"></i>
+            </span>
+        `).join("");
     }
 
     function getRepoDemoLink(repo) {
@@ -540,17 +598,20 @@ window.PortfolioProjectCatalog = (function () {
         return null;
     }
 
-    function renderCard(project) {
+    function renderCard(project, options = {}) {
         const primaryAction = getPrimaryAction(project);
         const codeHref = normalizeLink(project?.links?.code);
         const ownerName = project.owner || "Sumit Kumar Verma";
         const repoInfo = project?.repoKey ? { key: project.repoKey } : parseGitHubRepo(codeHref);
         const hasInlineStars = Number.isFinite(Number(project?.stars));
         const updatedAt = project?.updatedAt || "";
-        const tagsMarkup = (project.tags || [])
-            .slice(0, 4)
-            .map((tag) => `<span class="project-card__tag">${escapeHtml(tag)}</span>`)
-            .join("") || `<span class="project-card__tag">${escapeHtml(project.label || "Project")}</span>`;
+        const stackMarkup = renderStackIcons(project);
+        const cardClasses = [
+            "box",
+            "project-card",
+            project.featured ? "project-card--featured" : "",
+            options.isHero ? "project-card--hero" : "",
+        ].filter(Boolean).join(" ");
         const badgeMarkup = project.featured
             ? '<span class="project-card__badge">Featured</span>'
             : "";
@@ -558,7 +619,7 @@ window.PortfolioProjectCatalog = (function () {
             ? `<p class="project-card__meta" data-repo-key="${escapeHtml(repoInfo.key)}"${hasInlineStars ? ` data-stars="${escapeHtml(String(Number(project.stars || 0)))}"` : ""}${updatedAt ? ` data-updated-at="${escapeHtml(updatedAt)}"` : ""}>GitHub stats loading...</p>`
             : '<p class="project-card__meta">GitHub stats unavailable</p>';
         const codeActionMarkup = codeHref
-            ? `<a href="${escapeHtml(codeHref)}" class="project-card__link" target="_blank" rel="noreferrer">
+            ? `<a href="${escapeHtml(codeHref)}" class="project-card__link project-card__link--secondary" target="_blank" rel="noreferrer">
                 <i class="fab fa-github" aria-hidden="true"></i>
                 <span>Code</span>
               </a>`
@@ -572,7 +633,7 @@ window.PortfolioProjectCatalog = (function () {
                 <i class="fas fa-external-link-alt" aria-hidden="true"></i>
               </a>`
             : `<span class="project-card__link project-card__link--muted project-card__link--primary" aria-disabled="true">
-                <span>Demo Unavailable</span>
+                <span>Preview Unavailable</span>
                 <i class="fas fa-external-link-alt" aria-hidden="true"></i>
               </span>`;
         const imageSrc = normalizeLink(project?.image || "");
@@ -581,10 +642,14 @@ window.PortfolioProjectCatalog = (function () {
             : "";
 
         return `
-        <article class="box" data-category="${escapeHtml(project.category || "fullstack")}" data-featured="${project.featured ? "true" : "false"}">
+        <article class="${cardClasses}" data-category="${escapeHtml(project.category || "fullstack")}" data-featured="${project.featured ? "true" : "false"}">
           <div class="project-card__media">
             ${badgeMarkup}
             ${mediaMarkup}
+            <div class="project-card__media-overlay" aria-hidden="true">
+              <span class="project-card__overlay-chip">${escapeHtml(project.label || "Project")}</span>
+              <span class="project-card__overlay-text">Built for production</span>
+            </div>
           </div>
           <div class="project-card__body">
             <span class="project-card__label">${escapeHtml(project.label || "Project")}</span>
@@ -592,7 +657,9 @@ window.PortfolioProjectCatalog = (function () {
             <p class="project-card__owner">Built by ${escapeHtml(ownerName)}</p>
             ${githubMetaMarkup}
             <p class="project-card__desc">${escapeHtml(project.summary || project.description || "")}</p>
-            <div class="project-card__tags">${tagsMarkup}</div>
+            <div class="project-card__stack" aria-label="Tech stack">
+              ${stackMarkup}
+            </div>
             <div class="project-card__actions">
               ${codeActionMarkup}
               ${primaryActionMarkup}
@@ -601,9 +668,62 @@ window.PortfolioProjectCatalog = (function () {
         </article>`;
     }
 
-    function render(container, projects) {
-        container.innerHTML = projects.map((project) => renderCard(project)).join("");
+    function animateCardsOnScroll(container) {
+        const cards = Array.from(container.querySelectorAll(".project-card"));
+
+        if (!cards.length) {
+            return;
+        }
+
+        const prefersReducedMotion = typeof window !== "undefined"
+            && typeof window.matchMedia === "function"
+            && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+        cards.forEach((card, index) => {
+            card.style.setProperty("--project-reveal-delay", `${Math.min(index * 70, 280)}ms`);
+            card.classList.add("is-reveal-ready");
+        });
+
+        if (prefersReducedMotion || typeof IntersectionObserver === "undefined") {
+            cards.forEach((card) => card.classList.add("is-visible"));
+            return;
+        }
+
+        if (cardRevealObserver) {
+            cardRevealObserver.disconnect();
+        }
+
+        cardRevealObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) {
+                    return;
+                }
+
+                entry.target.classList.add("is-visible");
+                observer.unobserve(entry.target);
+            });
+        }, {
+            rootMargin: "0px 0px -40px 0px",
+            threshold: 0.2,
+        });
+
+        cards.forEach((card) => {
+            card.classList.remove("is-visible");
+            cardRevealObserver.observe(card);
+        });
+    }
+
+    function render(container, projects, options = {}) {
+        const enableHeroCard = options.heroCard === true;
+        const heroIndex = enableHeroCard
+            ? projects.findIndex((project) => project && project.featured)
+            : -1;
+
+        container.innerHTML = projects.map((project, index) => renderCard(project, {
+            isHero: heroIndex !== -1 && heroIndex === index && projects.length > 2,
+        })).join("");
         hydrateGitHubMetadata(container);
+        animateCardsOnScroll(container);
     }
 
     return {
