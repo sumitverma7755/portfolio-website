@@ -108,6 +108,25 @@ window.PortfolioProjectCatalog = (function () {
         { label: "Cloud", iconClass: "fas fa-cloud", keywords: ["cloud", "docker", "vercel", "netlify", "aws"] },
     ];
 
+    const REPO_IMAGE_OVERRIDES = {
+        "sumitverma7755/netfilx": {
+            src: "/assets/images/projects/netfilx-highlights.png",
+            alt: "Stranger Things highlights Netflix homepage preview.",
+        },
+        "sumitverma7755/pcsense": {
+            src: "/assets/images/projects/pcsense-diagnostics.png",
+            alt: "PCSense system diagnostics interface preview.",
+        },
+        "sumitverma7755/deepfake_detector": {
+            src: "/assets/images/projects/deepfake-detector-dashboard.png",
+            alt: "Deepfake detection dashboard overview preview.",
+        },
+        "sumitverma7755/multiplediseaseprediction": {
+            src: "/assets/images/projects/multiple-disease-prediction-dashboard.png",
+            alt: "Multiple disease prediction dashboard interface preview.",
+        },
+    };
+
     function escapeHtml(value = "") {
         return String(value)
             .replace(/&/g, "&amp;")
@@ -350,12 +369,23 @@ window.PortfolioProjectCatalog = (function () {
         return "";
     }
 
+    function getRepoImageOverride(repo) {
+        const repoKey = String(repo?.full_name || "").trim().toLowerCase();
+
+        if (repoKey && REPO_IMAGE_OVERRIDES[repoKey]) {
+            return REPO_IMAGE_OVERRIDES[repoKey];
+        }
+
+        return null;
+    }
+
     function normalizeRepoToProject(repo, featuredRepoIds) {
         const category = inferCategory(repo);
         const displayName = toTitleCase(repo?.name || "Untitled Repository");
         const summary = repo?.description
             ? repo.description
             : `Source code and implementation details for ${displayName}.`;
+        const imageOverride = getRepoImageOverride(repo);
 
         return {
             id: String(repo?.id || repo?.name || Math.random()),
@@ -365,10 +395,10 @@ window.PortfolioProjectCatalog = (function () {
             label: CATEGORY_LABELS[category] || "Project",
             summary,
             description: summary,
-            image: repo?.full_name
+            image: imageOverride?.src || (repo?.full_name
                 ? `https://opengraph.githubassets.com/1/${repo.full_name}`
-                : "",
-            imageAlt: `${displayName} repository preview.`,
+                : ""),
+            imageAlt: imageOverride?.alt || `${displayName} repository preview.`,
             tags: buildProjectTags(repo, category),
             owner: repo?.owner?.login || "sumitverma7755",
             stars: Number(repo?.stargazers_count || 0),
